@@ -15,7 +15,7 @@ router.post('/signup', async (req, res, next) => {
 
     // Check if email or password or username are provided as empty string
     if (email === '' || password === '' || username === '') {
-      res.status(400).json({ message: 'Provide email, password and username' });
+      res.status(400).json({ message: 'Forneça email, password e username.' });
       return;
     }
 
@@ -34,7 +34,7 @@ router.post('/signup', async (req, res, next) => {
     } */
 
     if (!email || !password || !username) {
-      res.status(400).json({ message: 'Missing fields' });
+      res.status(400).json({ message: 'Campos em falta.' });
       return;
     }
 
@@ -43,7 +43,7 @@ router.post('/signup', async (req, res, next) => {
 
     // If the user with the same email already exists, send an error response
     if (foundUser) {
-      res.status(400).json({ message: 'User already exists.' });
+      res.status(400).json({ message: 'Utilizador já existe.' });
       return;
     }
 
@@ -74,7 +74,7 @@ router.post('/login', async (req, res, next) => {
 
     // Check if email or password are provided as empty string
     if (!password || !email) {
-      res.status(400).json({ message: 'Provide email and password.' });
+      res.status(400).json({ message: 'Forneça email e password.' });
       return;
     }
 
@@ -83,7 +83,7 @@ router.post('/login', async (req, res, next) => {
 
     if (!foundUser) {
       // If the user is not found, send an error response
-      res.status(401).json({ message: 'Invalid login' });
+      res.status(401).json({ message: 'Login inválido.' });
       return;
     }
 
@@ -92,10 +92,10 @@ router.post('/login', async (req, res, next) => {
 
     if (passwordCorrect) {
       // Deconstruct the user object to omit the password
-      const { _id, email, username, imageUrl, notifications, followers, posts } = foundUser;
+      const { _id, email, username, imageUrl } = foundUser;
 
       // Create an object that will be set as the token payload
-      const payload = { _id, email, username, imageUrl, notifications, followers, posts };
+      const payload = { _id, email, username, imageUrl };
 
       // Create and sign the token
       const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
@@ -106,7 +106,7 @@ router.post('/login', async (req, res, next) => {
       // Send the token as the response
       res.status(200).json({ authToken: authToken });
     } else {
-      res.status(401).json({ message: 'Invalid login' });
+      res.status(401).json({ message: 'Login inválido.' });
     }
   } catch (error) {
     res.status(500).json({ message: 'Something went wrong while trying to login.' });

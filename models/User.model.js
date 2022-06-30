@@ -25,6 +25,10 @@ const userSchema = new Schema(
       type: String,
       /* required: true */
     },
+    imageUrl: {
+      type: String,
+      default: '',
+    },
     orders: [{ type: Schema.Types.ObjectId, ref: 'Order' }],
     userType: {
       type: String,

@@ -17,6 +17,7 @@ const itemSchema = new Schema(
     },
     amount: {
       type: Number,
+      default: 1,
     },
     imageUrl: {
       type: String,

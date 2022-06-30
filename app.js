@@ -22,6 +22,9 @@ app.use('/api', allRoutes);
 const authRouter = require('./routes/auth.routes');
 app.use('/api', authRouter);
 
+const emailRouter = require('./routes/email.routes');
+app.use('/api', emailRouter);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require('./error-handling')(app);
 
