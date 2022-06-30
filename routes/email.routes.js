@@ -1,8 +1,7 @@
 const router = require('express').Router();
-const nodemailer = require('nodemailer');
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
-const jwt = require('jsonwebtoken'); //<= to create and sign new JSON Web Tokens
+const nodemailer = require('nodemailer');
 const User = require('../models/User.model');
 const { sendResetPass } = require('../utils/sendResetPass');
 
@@ -27,9 +26,9 @@ router.post('/send-email', (req, res, next) => {
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       //console.log(error);
-      res.status(400).json({ message: 'Something went wrong while trying to send email => ' + error });
+      res.status(400).json({ message: 'Algo correu mal ao tentar enviar email: ' + error });
     } else {
-      res.status(200).json({ message: 'Email Successfully Sent' });
+      res.status(200).json({ message: 'Email enviado com sucesso: ' + info.response });
     }
   });
 });
@@ -41,17 +40,17 @@ router.post('/forgot', async (req, res, next) => {
 
   if (foundUser) {
     try {
-      sendResetPass(email, foundUser._id);
-      res.status(200).json({ message: 'Email sent successfully' });
+      sendResetPass(email, foundUser._id, res);
     } catch (error) {
-      console.log(error);
-      res.status(404).json({ message: 'Something went wrong', error });
+      res.status(400).json({ message: 'Algo correu mal ao tentar fazer enviar email de recuperação da password.', error });
     }
+  } else {
+    res.status(500).json({ message: 'User não encontrado.', error });
   }
 });
 
 // User clicks the link in email and go to form
-// Comming from the reset form
+// Comming from the reset-form to /reset
 
 router.post('/reset', async (req, res, next) => {
   const { userId, password } = req.body;
@@ -65,10 +64,10 @@ router.post('/reset', async (req, res, next) => {
       let updatedUser = await User.findByIdAndUpdate(userId, { password: hashedPassword }, { new: true });
       res.status(200).json(updatedUser);
     } catch (error) {
-      res.status(400).json({ message: 'Unable to update users password', error });
+      res.status(400).json({ message: 'Algo correu mal ao tentar actualizar a password do user.', error });
     }
   } else {
-    res.status(404).json({ message: 'User does not exist.', error });
+    res.status(500).json({ message: 'User não encontrado.', error });
   }
 });
 

@@ -5,7 +5,7 @@ const { Schema, model } = require('mongoose');
 const orderSchema = new Schema(
   {
     deliveryDate: {
-      type: String,
+      type: Date,
     },
     orderStatus: {
       type: String,
@@ -13,11 +13,11 @@ const orderSchema = new Schema(
       default: 'pending',
     },
     contact: {
-      type: Number,
+      type: String,
     },
     address: {
       type: String,
-      /* required: true */
+      required: true,
     },
     total: {
       type: Number,
