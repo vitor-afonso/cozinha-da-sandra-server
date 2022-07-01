@@ -1,3 +1,4 @@
+// jshint esversion:9
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
@@ -67,7 +68,7 @@ router.post('/reset', async (req, res, next) => {
       res.status(400).json({ message: 'Algo correu mal ao tentar actualizar a password do user.', error });
     }
   } else {
-    res.status(500).json({ message: 'User não encontrado.', error });
+    res.status(500).json({ message: 'User não encontrado.' });
   }
 });
 
