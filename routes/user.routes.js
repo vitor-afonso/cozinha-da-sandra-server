@@ -16,6 +16,24 @@ router.get('/users', isAuthenticated, async (req, res, next) => {
   }
 });
 
+/************************** GET ONE USER *********************************/
+
+router.get('/users/:userId', isAuthenticated, async (req, res, next) => {
+  const { userId } = req.params;
+
+  try {
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      res.status(401).json({ message: 'Specified id is not valid' });
+      return;
+    }
+
+    let response = await User.findById(userId);
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
+});
+
 /************************** UPDATE USER *********************************/
 
 router.put('/users/:userId', isAuthenticated, async (req, res, next) => {
