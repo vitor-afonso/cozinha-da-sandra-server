@@ -2,7 +2,6 @@
 
 const router = require('express').Router();
 const mongoose = require('mongoose');
-const User = require('../models/User.model');
 const Item = require('../models/Item.model');
 const { isAuthenticated } = require('./../middleware/jwt.middleware');
 
