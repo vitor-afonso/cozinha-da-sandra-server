@@ -18,6 +18,9 @@ require('./config')(app);
 // 👇 Start handling routes here
 // Contrary to the views version, all routes are controlled from the routes/index.js
 
+const fileUploadRouter = require('./routes/fileUpload.routes');
+app.use('/api', fileUploadRouter);
+
 const indexRouter = require('./routes/index.routes');
 app.use('/api', indexRouter);
 
