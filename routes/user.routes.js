@@ -30,7 +30,7 @@ router.get('/users/:userId', isAuthenticated, async (req, res, next) => {
     let response = await User.findById(userId);
     res.status(200).json(response);
   } catch (error) {
-    res.status(500).json({ message: error });
+    res.status(500).json({ message: 'Algo correu mal ao carregar 1 user da base de dados:', error });
   }
 });
 
@@ -41,7 +41,7 @@ router.put('/users/:userId', isAuthenticated, async (req, res, next) => {
     const { userId } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(userId)) {
-      res.status(401).json({ message: 'O id especificado não é valido.' });
+      res.status(401).json({ message: 'O userId especificado não é valido.' });
       return;
     }
 

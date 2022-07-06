@@ -17,7 +17,6 @@ const orderSchema = new Schema(
     },
     address: {
       type: String,
-      required: true,
     },
     total: {
       type: Number,
@@ -25,6 +24,10 @@ const orderSchema = new Schema(
     items: [{ type: Schema.Types.ObjectId, ref: 'Item' }],
     message: { type: String },
     userId: { type: Schema.Types.ObjectId, ref: 'User' },
+    orderPlaced: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
