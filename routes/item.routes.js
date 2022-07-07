@@ -36,7 +36,7 @@ router.post('/items', isAuthenticated, async (req, res, next) => {
 
 /************************** UPDATE ITEM *********************************/
 
-router.put('/items/:itemId', isAuthenticated, async (req, res, next) => {
+router.put('/items/edit/:itemId', isAuthenticated, async (req, res, next) => {
   try {
     const { itemId } = req.params;
 
@@ -54,7 +54,7 @@ router.put('/items/:itemId', isAuthenticated, async (req, res, next) => {
 
 /************************** DELETE ITEM *********************************/
 
-router.delete('/items/:itemId', isAuthenticated, async (req, res, next) => {
+router.delete('/items/delete/:itemId', isAuthenticated, async (req, res, next) => {
   try {
     const { itemId } = req.params;
 

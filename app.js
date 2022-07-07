@@ -18,9 +18,6 @@ require('./config')(app);
 // 👇 Start handling routes here
 // Contrary to the views version, all routes are controlled from the routes/index.js
 
-const fileUploadRouter = require('./routes/fileUpload.routes');
-app.use('/api', fileUploadRouter);
-
 const indexRouter = require('./routes/index.routes');
 app.use('/api', indexRouter);
 
@@ -38,6 +35,9 @@ app.use('/api', userRouter);
 
 const orderRouter = require('./routes/order.routes');
 app.use('/api', orderRouter);
+
+const fileUploadRouter = require('./routes/fileUpload.routes');
+app.use('/api', fileUploadRouter);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require('./error-handling')(app);

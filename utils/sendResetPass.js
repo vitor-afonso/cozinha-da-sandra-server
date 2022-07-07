@@ -22,7 +22,7 @@ const sendResetPass = (email, id, res) => {
     if (error) {
       res.status(400).json({ message: 'Algo correu mal ao enviar o email para repor password.', error });
     } else {
-      res.status(200).json({ message: 'Email enviado com sucesso.', info });
+      res.status(200).json({ message: 'Email para repor password enviado com sucesso.', info });
     }
   });
 };

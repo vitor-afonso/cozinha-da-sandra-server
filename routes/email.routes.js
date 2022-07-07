@@ -1,7 +1,6 @@
 // jshint esversion:9
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
-const saltRounds = 10;
 const nodemailer = require('nodemailer');
 const User = require('../models/User.model');
 const { sendResetPass } = require('../utils/sendResetPass');
@@ -53,8 +52,10 @@ router.post('/forgot', async (req, res, next) => {
 // User clicks the link in email and go to form
 // Comming from the reset-form to /reset
 
-router.post('/reset', async (req, res, next) => {
-  const { userId, password } = req.body;
+router.post('/reset/:userId', async (req, res, next) => {
+  const { userId } = req.params;
+  const { password } = req.body;
+  const saltRounds = 10;
 
   let foundUser = await User.findById(userId);
 
