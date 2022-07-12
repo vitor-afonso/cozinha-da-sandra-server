@@ -58,7 +58,7 @@ router.get('/orders/:orderId', isAuthenticated, async (req, res, next) => {
 
 /************************** UPDATE ORDER *********************************/
 
-router.put('/orders/:orderId', isAuthenticated, async (req, res, next) => {
+router.put('/orders/edit/:orderId', isAuthenticated, async (req, res, next) => {
   try {
     const { orderId } = req.params;
 
@@ -76,7 +76,7 @@ router.put('/orders/:orderId', isAuthenticated, async (req, res, next) => {
 
 /************************** DELETE ORDER *********************************/
 
-router.delete('/orders/:orderId', isAuthenticated, async (req, res, next) => {
+router.put('/orders/delete/:orderId', isAuthenticated, async (req, res, next) => {
   try {
     const { orderId } = req.params;
 
@@ -85,9 +85,9 @@ router.delete('/orders/:orderId', isAuthenticated, async (req, res, next) => {
       return;
     }
 
-    await Order.findByIdAndRemove(orderId);
+    let response = await Order.findByIdAndUpdate(orderId, req.body, { new: true });
 
-    res.status(200).json({ message: `Order com o id: ${orderId} foi apagado com sucesso.` });
+    res.status(200).json(response);
   } catch (error) {
     res.status(500).json({ message: 'Algo correu mal ao apagar order na base de dados:', error });
   }

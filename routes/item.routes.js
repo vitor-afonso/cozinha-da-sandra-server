@@ -54,7 +54,7 @@ router.put('/items/edit/:itemId', isAuthenticated, async (req, res, next) => {
 
 /************************** DELETE ITEM *********************************/
 
-router.delete('/items/delete/:itemId', isAuthenticated, async (req, res, next) => {
+router.put('/items/delete/:itemId', isAuthenticated, async (req, res, next) => {
   try {
     const { itemId } = req.params;
 
@@ -63,9 +63,9 @@ router.delete('/items/delete/:itemId', isAuthenticated, async (req, res, next) =
       return;
     }
 
-    await Item.findByIdAndRemove(itemId);
+    let response = await Item.findByIdAndUpdate(itemId, req.body, { new: true });
 
-    res.status(200).json({ message: `Item com o id: ${itemId} foi apagado com sucesso.` });
+    res.status(200).json(response);
   } catch (error) {
     res.status(500).json({ message: 'Algo correu mal ao apagar item na base de dados:', error });
   }

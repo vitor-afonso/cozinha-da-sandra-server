@@ -37,6 +37,10 @@ const userSchema = new Schema(
     info: {
       type: String,
     },
+    active: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

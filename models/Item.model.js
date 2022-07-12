@@ -27,6 +27,10 @@ const itemSchema = new Schema(
       type: String,
       trim: true,
     },
+    active: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,

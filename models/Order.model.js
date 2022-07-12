@@ -24,6 +24,10 @@ const orderSchema = new Schema(
     items: [{ type: Schema.Types.ObjectId, ref: 'Item' }],
     message: { type: String },
     userId: { type: Schema.Types.ObjectId, ref: 'User' },
+    active: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,
