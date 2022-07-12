@@ -87,6 +87,11 @@ router.post('/login', async (req, res, next) => {
       return;
     }
 
+    if (foundUser.deleted) {
+      res.status(401).json({ message: `A conta com o email ${email} encontra-se desactivada. Solicite reactivação enviando email para "cozinhadasandra22@gmail.com", obrigado.` });
+      return;
+    }
+
     // Compare the provided password with the one saved in the database
     const passwordCorrect = bcrypt.compareSync(password, foundUser.password);
 

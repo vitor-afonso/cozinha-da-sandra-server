@@ -27,9 +27,9 @@ const itemSchema = new Schema(
       type: String,
       trim: true,
     },
-    active: {
+    deleted: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   {

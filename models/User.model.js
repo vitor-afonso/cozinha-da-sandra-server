@@ -37,9 +37,9 @@ const userSchema = new Schema(
     info: {
       type: String,
     },
-    active: {
+    deleted: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   {
