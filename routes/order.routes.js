@@ -31,7 +31,7 @@ router.post('/orders', isAuthenticated, async (req, res, next) => {
 
 router.get('/orders', isAuthenticated, async (req, res, next) => {
   try {
-    const response = await Order.find();
+    const response = await Order.find({ deleted: false }).populate('userId').populate('items');
     res.status(200).json(response);
   } catch (error) {
     res.status(500).json({ message: 'Algo correu mal ao carregar as orders da base de dados:', error });
