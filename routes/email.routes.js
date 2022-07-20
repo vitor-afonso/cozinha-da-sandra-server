@@ -2,10 +2,11 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
+const { isAuthenticated } = require('../middleware/jwt.middleware');
 const User = require('../models/User.model');
 const { sendResetPass } = require('../utils/sendResetPass');
 
-router.post('/send-email', (req, res, next) => {
+router.post('/send-email', isAuthenticated, (req, res, next) => {
   const { from, to, subject, message } = req.body;
 
   let transporter = nodemailer.createTransport({
@@ -34,7 +35,7 @@ router.post('/send-email', (req, res, next) => {
 });
 
 router.post('/forgot', async (req, res, next) => {
-  const email = req.body.email;
+  const { email } = req.body;
 
   let foundUser = await User.findOne({ email });
 
@@ -45,7 +46,7 @@ router.post('/forgot', async (req, res, next) => {
       res.status(400).json({ message: 'Algo correu mal ao tentar fazer enviar email de recuperação da password.', error });
     }
   } else {
-    res.status(500).json({ message: 'User não encontrado.', error });
+    res.status(500).json({ message: `User com o email ${email} não encontrado.`, error });
   }
 });
 
