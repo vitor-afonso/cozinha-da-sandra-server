@@ -50,9 +50,6 @@ router.post('/forgot', async (req, res, next) => {
   }
 });
 
-// User clicks the link in email and go to form
-// Comming from the reset-form to /reset
-
 router.post('/reset/:userId', async (req, res, next) => {
   const { userId } = req.params;
   const { password } = req.body;

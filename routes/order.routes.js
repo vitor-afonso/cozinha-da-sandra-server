@@ -49,7 +49,7 @@ router.get('/orders/:orderId', isAuthenticated, async (req, res, next) => {
       return;
     }
 
-    let response = await Order.findById(orderId);
+    let response = await Order.findById(orderId).populate('userId').populate('items');
     res.status(200).json(response);
   } catch (error) {
     res.status(500).json({ message: 'Algo correu mal ao carregar 1 order da base de dados:', error });
