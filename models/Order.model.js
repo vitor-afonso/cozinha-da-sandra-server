@@ -6,11 +6,21 @@ const orderSchema = new Schema(
   {
     deliveryDate: {
       type: Date,
+      required: true,
+    },
+    deliveryMethod: {
+      type: String,
+      enum: ['delivery', 'takeAway'],
+      required: true,
     },
     orderStatus: {
       type: String,
       enum: ['pending', 'confirmed', 'rejected'],
       default: 'pending',
+    },
+    paid: {
+      type: Boolean,
+      default: false,
     },
     contact: {
       type: String,
