@@ -63,7 +63,7 @@ router.put('/orders/edit/:orderId', isAuthenticated, async (req, res, next) => {
     const { orderId } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(orderId)) {
-      res.status(401).json({ message: 'O userId especificado não é valido.' });
+      res.status(401).json({ message: 'O orderId especificado não é valido.' });
       return;
     }
     let response = await Order.findByIdAndUpdate(orderId, req.body, { new: true });
