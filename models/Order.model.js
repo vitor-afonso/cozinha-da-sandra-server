@@ -28,6 +28,13 @@ const orderSchema = new Schema(
     address: {
       type: String,
     },
+    deliveryFee: {
+      type: Number,
+    },
+    deliveryDiscount: {
+      type: Boolean,
+      default: false,
+    },
     total: {
       type: Number,
     },
