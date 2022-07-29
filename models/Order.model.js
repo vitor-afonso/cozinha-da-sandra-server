@@ -31,10 +31,6 @@ const orderSchema = new Schema(
     deliveryFee: {
       type: Number,
     },
-    deliveryDiscount: {
-      type: Boolean,
-      default: false,
-    },
     total: {
       type: Number,
     },
