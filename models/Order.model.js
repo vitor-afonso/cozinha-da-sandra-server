@@ -31,6 +31,9 @@ const orderSchema = new Schema(
     deliveryFee: {
       type: Number,
     },
+    amountForFreeDelivery: {
+      type: Number,
+    },
     total: {
       type: Number,
     },
